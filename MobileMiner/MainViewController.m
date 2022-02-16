@@ -203,7 +203,7 @@
         [pb setString:((UILabel *)sender.view).text];
         if (!copied){
             copied=[[UIView alloc] initWithFrame:CGRectMake(0,-60,self.view.frame.size.width,60)];
-            copied.backgroundColor=[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1];
+            copied.backgroundColor=[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:1.0];
             copied.layer.cornerRadius=15;
             copied.layer.masksToBounds=YES;
             label=[[UILabel alloc] initWithFrame:CGRectMake(0,10,self.view.frame.size.width,40)];
@@ -540,7 +540,7 @@ int getloadavg (double loadavg[], int nelem);
         cell.textLabel.text=@"Keep Alive in Background";
         cell.detailTextLabel.text=@"Force-keep running in background";
         UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-        switchView.onTintColor=[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1];
+        switchView.onTintColor=[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:1.0];
         cell.accessoryView = switchView;
         BOOL isOn = [defaults objectForKey:@"inBackground"] ?  [defaults boolForKey:@"inBackground"] : YES;
         [switchView setOn:isOn animated:NO];
@@ -552,7 +552,7 @@ int getloadavg (double loadavg[], int nelem);
         cell.textLabel.text=@"Allow Notifications";
         cell.detailTextLabel.text=@"Status updates while backgrounded";
         UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-        switchView.onTintColor=[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1];
+        switchView.onTintColor=[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:1.0];
         cell.accessoryView = switchView;
         cell.hasSeparator=YES;
         
@@ -665,7 +665,7 @@ int getloadavg (double loadavg[], int nelem);
         [pb setString:((UILabel *)sender.view).text];
         if (!copied){
             copied=[[UIView alloc] initWithFrame:CGRectMake(0,-60,self.view.frame.size.width,60)];
-            copied.backgroundColor=[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1];
+            copied.backgroundColor=[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:1.0];
             copied.layer.cornerRadius=15;
             copied.layer.masksToBounds=YES;
             UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake(0,10,self.view.frame.size.width,40)];
@@ -733,12 +733,12 @@ int getloadavg (double loadavg[], int nelem);
     if (!mineButton){
         UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"gear"] style:UIBarButtonItemStylePlain target:self action:@selector(openSettings:)];
         self.navigationItem.rightBarButtonItem=right;
-        self.navigationItem.rightBarButtonItem.tintColor=[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1];
+        self.navigationItem.rightBarButtonItem.tintColor=[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:1.0];
         [right release];
         
         UIBarButtonItem *left=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"love"] style:UIBarButtonItemStylePlain target:self action:@selector(openDonations:)];
         self.navigationItem.leftBarButtonItem=left;
-        self.navigationItem.leftBarButtonItem.tintColor=[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1];
+        self.navigationItem.leftBarButtonItem.tintColor=[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:1.0];
         [left release];
        
         mineButton=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
@@ -758,8 +758,8 @@ int getloadavg (double loadavg[], int nelem);
         [mineButton setBackgroundImage:[UIImage imageNamed:@"buttonbg-selected"] forState:(UIControlState)5];
 
         [mineButton setTitleColor:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1] forState:UIControlStateNormal];
-        [mineButton setTitleColor:[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1] forState:UIControlStateSelected];
-        [mineButton setTitleColor:[UIColor colorWithRed:1 green:0.8 blue:0 alpha:0.5] forState:(UIControlState)5];
+        [mineButton setTitleColor:[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:1.0] forState:UIControlStateSelected];
+        [mineButton setTitleColor:[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:0.5] forState:(UIControlState)5];
         
         [mineButton setTitleColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.7] forState:UIControlStateDisabled];
         
@@ -895,7 +895,7 @@ int getloadavg (double loadavg[], int nelem);
         
         confLabel=[[InfoLabel alloc] initWithFrame:CGRectMake(0,-30,self.view.frame.size.width,20)];
         confLabel.font=[UIFont boldSystemFontOfSize:17];
-        confLabel.textColor=[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1];
+        confLabel.textColor=[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:1.0];
         confLabel.textAlignment=NSTextAlignmentCenter;
         confLabel.text=@"Active Mining Configuration:";
        
