@@ -744,9 +744,9 @@ int getloadavg (double loadavg[], int nelem);
         mineButton=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
         BOOL isReachable=[[objc_getClass("PCPersistentInterfaceManager") sharedInstance] isInternetReachable];
         
-        [mineButton setTitle:@"Start Mining!" forState:UIControlStateNormal];
-        [mineButton setTitle:@"Stop Mining" forState:UIControlStateSelected];
-        [mineButton setTitle:@"Stop Mining" forState:(UIControlState)5];
+        [mineButton setTitle:@"Start ETN Mining!" forState:UIControlStateNormal];
+        [mineButton setTitle:@"Stop ETN Mining" forState:UIControlStateSelected];
+        [mineButton setTitle:@"Stop ETN Mining" forState:(UIControlState)5];
         [mineButton setTitle:isReachable ? @"Stopping..." : @"Cannot Mine" forState:UIControlStateDisabled];
         mineButton.enabled=isReachable || state==1;
         mineButton.titleLabel.font=[UIFont boldSystemFontOfSize:30];
@@ -771,7 +771,7 @@ int getloadavg (double loadavg[], int nelem);
         infoLabel.font=[UIFont systemFontOfSize:22];
         infoLabel.textAlignment=NSTextAlignmentCenter;
         infoLabel.adjustsFontSizeToFitWidth=YES;
-        infoLabel.text= isReachable ? @"Ready to Start" : @"Please connect to the Internet";
+        infoLabel.text= isReachable ? @"Ready to Start" : @"Unable to connect to the internet";
         
         [self.view addSubview:mineButton];
         [self.view addSubview:infoLabel];
@@ -883,7 +883,7 @@ int getloadavg (double loadavg[], int nelem);
         
         mineButton.enabled=connected || state==1;
         [mineButton setTitle:connected ? @"Stopping..." : @"Cannot Mine" forState:UIControlStateDisabled];
-        infoLabel.text=connected ? (state==0 ? @"Ready to Start" : (state==1 ? @"" : @"Waiting for processes to stop...")) : @"Please connect to the Internet";
+        infoLabel.text=connected ? (state==0 ? @"Ready to Start" : (state==1 ? @"" : @"Waiting for processes to stop...")) : @"Unable to connect to the internet";
     });
     
 }
