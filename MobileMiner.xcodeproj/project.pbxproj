@@ -11,6 +11,7 @@
 		543DB8DD27BD94F800A2817C /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 543DB8D827BD94F800A2817C /* libjansson.a */; };
 		543DB8DE27BD94F800A2817C /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 543DB8D927BD94F800A2817C /* libcurl.a */; };
 		543DB8DF27BD94F800A2817C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 543DB8DA27BD94F800A2817C /* libcrypto.a */; };
+		54AB175227BEEF9A00207FBB /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54AB174D27BEDFC100207FBB /* UserNotifications.framework */; };
 		64010F931FE1A1970007F322 /* LicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64010F921FE1A1970007F322 /* LicenseViewController.m */; };
 		64010F951FE1A3040007F322 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 64010F941FE1A3040007F322 /* License.txt */; };
 		64010F981FE1BFF90007F322 /* LogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64010F971FE1BFF90007F322 /* LogViewController.m */; };
@@ -54,6 +55,7 @@
 		543DB8D827BD94F800A2817C /* libjansson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjansson.a; path = "Precompiled Binaries/libjansson.a"; sourceTree = SOURCE_ROOT; };
 		543DB8D927BD94F800A2817C /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "Precompiled Binaries/libcurl.a"; sourceTree = SOURCE_ROOT; };
 		543DB8DA27BD94F800A2817C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "Precompiled Binaries/libcrypto.a"; sourceTree = SOURCE_ROOT; };
+		54AB174D27BEDFC100207FBB /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		64010F911FE1A1690007F322 /* LicenseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LicenseViewController.h; sourceTree = "<group>"; };
 		64010F921FE1A1970007F322 /* LicenseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LicenseViewController.m; sourceTree = "<group>"; };
 		64010F941FE1A3040007F322 /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54AB175227BEEF9A00207FBB /* UserNotifications.framework in Frameworks */,
 				543DB8DD27BD94F800A2817C /* libjansson.a in Frameworks */,
 				543DB8DF27BD94F800A2817C /* libcrypto.a in Frameworks */,
 				543DB8DE27BD94F800A2817C /* libcurl.a in Frameworks */,
@@ -132,6 +135,7 @@
 		646155B41FE04BDE008FD730 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54AB174D27BEDFC100207FBB /* UserNotifications.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -161,9 +165,9 @@
 				64E163121FDEB137003EEC24 /* Assets.xcassets */,
 				64FC35011FEAE0FA00197F5E /* love@2x.png */,
 				645B8B8D1FE3626B00FDE401 /* AddConfigurationViewController.h */,
+				645B8B8E1FE362D600FDE401 /* AddConfigurationViewController.m */,
 				64E163091FDEB137003EEC24 /* AppDelegate.h */,
 				64E1630A1FDEB137003EEC24 /* AppDelegate.m */,
-				645B8B8E1FE362D600FDE401 /* AddConfigurationViewController.m */,
 				64010FA31FE2E56A0007F322 /* BackgroundTask.h */,
 				64010FA41FE2E58D0007F322 /* BackgroundTask.m */,
 				645B8B971FE4B53200FDE401 /* CustomCell.h */,

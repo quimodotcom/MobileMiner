@@ -179,15 +179,21 @@ static void stateCallback(CFNotificationCenterRef center, void *observer, CFNoti
         if ((strstr(message,"ccepted") || strstr(message,"at diff")) && [[UIApplication sharedApplication] applicationState]==2){
             BOOL allowsNotifications=[defaults objectForKey:@"allowNotifications"] ? [defaults boolForKey:@"allowNotifications"] : YES;
             if (allowsNotifications){
+                UNUserNotificationCenter *notificationCenter = [UNUserNotificationCenter currentNotificationCenter];
+                UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc]init];
                 
-                UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-                localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:0.5];
-                localNotification.timeZone = [NSTimeZone systemTimeZone];
-                localNotification.repeatInterval = 0;
-                //localNotification.soundName = @"dtmf-7.caf"; //UILocalNotificationDefaultSoundName;
-                localNotification.alertBody = [NSString stringWithUTF8String:message];
-                [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-                [localNotification release];
+                content.title = @"MobileMiner";
+                NSDate *date = [NSDate date];
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"%H:%M:%S"];
+                NSString *timeString = [formatter stringFromDate:date];
+                content.subtitle = @"Accepted Share";
+                content.body = [NSString stringWithFormat:@"%s,%@", "Accepted share at ", (NSString *)timeString];;
+                content.sound = [UNNotificationSound defaultSound];
+                
+                UNNotificationTrigger *trigger = [UNNotificationTrigger alloc];
+                UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"UYLLocalNotification" content:content trigger:trigger];
+                [notificationCenter addNotificationRequest:request withCompletionHandler:nil];
             }
         }
         
@@ -274,7 +280,7 @@ static void stateCallback(CFNotificationCenterRef center, void *observer, CFNoti
     char t[2];
     sprintf(t,"%d",threadsCount);
     threads=threadsCount;
-    char *args[]= {(char *)[execPath UTF8String],"-o",(char *)[[activeDict objectForKey:@"url"] UTF8String],"-u",(char *)[[activeDict objectForKey:@"user"] UTF8String],"-p",(char *)[[activeDict objectForKey:@"pass"] UTF8String],"-a","cryptonight","-t",t,"-r","10",NULL};
+    char *args[]= {(char *)[execPath UTF8String],"-o",(char *)[[activeDict objectForKey:@"url"] UTF8String],"-u",(char *)[[activeDict objectForKey:@"user"] UTF8String],"-p",(char *)[[activeDict objectForKey:@"pass"] UTF8String],"-a",(char *)[[activeDict objectForKey:@"algo"] UTF8String],"-t",t,"-r","10",NULL};
     
     // Actually start mining, calling the function from the pre-compiled cpuminer library:
     start_mining((int)(sizeof(args)/sizeof(char *))-1,args);
@@ -288,7 +294,6 @@ static void stateCallback(CFNotificationCenterRef center, void *observer, CFNoti
     miningButton.enabled=NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"MiningStateDidChangeNotification" object:self userInfo:@{@"state":@(2)}];
     CFNotificationCenterPostNotification(CFNotificationCenterGetLocalCenter(), CFSTR("STOP_MINING"), NULL, NULL, 0);
-    
 }
 
 -(void)toggleMining:(UIButton *)button{

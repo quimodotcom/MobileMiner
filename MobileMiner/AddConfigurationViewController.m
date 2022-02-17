@@ -130,12 +130,12 @@
     return 20;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return config ? 12 : 10;
+    return config ? 14 : 12;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (indexPath.row==11){
+    if (indexPath.row==12){
         
         NSArray *configs=[defaults objectForKey:CONFIGS_KEY];
         if ([configs count]==1){
@@ -183,6 +183,9 @@
     if (row==8){
         text=@"Threads:";
     }
+    if (row==10){
+        text=@"Algorthim Name:";
+    }
     
     // values
     if (row==1){
@@ -205,7 +208,10 @@
     if (row==9){
         placeholder=@"2";
         textFieldText=[config objectForKey:@"threads"];
-        
+    }
+    if (row==11){
+        placeholder=@"cryptonight";
+        textFieldText=[config objectForKey:@"algo"];
     }
     
     if (!cell){
@@ -238,7 +244,7 @@
     if (config){
         cell.textField.text=textFieldText;
     }
-    if (row==11){
+    if (row==12){
         
         cell.textField.placeholder=@"Delete";
         cell.textField.text=@"Delete";
@@ -287,6 +293,7 @@
     EditCell *cell2=(EditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:5  inSection:0]];
     EditCell *cell3=(EditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:7  inSection:0]];
     EditCell *cell4=(EditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9  inSection:0]];
+    EditCell *cell6=(EditCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:11  inSection:0]];
     
     
     NSString *url= [cell1.textField.text length] ? cell1.textField.text : cell1.textField.placeholder;
@@ -294,6 +301,8 @@
     NSString *pass= [cell3.textField.text length] ? cell3.textField.text : cell3.textField.placeholder;
     NSString *threads= [cell4.textField.text length] ? cell4.textField.text : cell4.textField.placeholder;
     NSString *name= [cell5.textField.text length] ? cell5.textField.text : cell5.textField.placeholder;
+    NSString *algo= [cell6.textField.text length] ? cell6.textField.text :
+        cell6.textField.placeholder;
     
     
     NSMutableArray *configs=[defaults mutableArrayValueForKey:CONFIGS_KEY] ?: [NSMutableArray array];
@@ -333,6 +342,7 @@
             [dict setObject:pass forKey:@"pass"];
             [dict setObject:threads forKey:@"threads"];
             [dict setObject:name forKey:@"name"];
+            [dict setObject:algo forKey:@"algo"];
             CFUUIDRef theUUID = CFUUIDCreate(NULL);
             CFStringRef uuid = CFUUIDCreateString(NULL, theUUID);
             CFRelease(theUUID);
@@ -363,6 +373,7 @@
         [mutableConfig setObject:pass forKey:@"pass"];
         [mutableConfig setObject:threads forKey:@"threads"];
         [mutableConfig setObject:name forKey:@"name"];
+        [mutableConfig setObject:algo forKey:@"algo"];
         unsigned long index=[configs indexOfObject:foundConfig];
         [configs replaceObjectAtIndex:index withObject:mutableConfig];
         NSArray *immutableConfigs=[configs copy];

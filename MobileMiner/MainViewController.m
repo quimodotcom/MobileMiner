@@ -172,6 +172,7 @@
     [self.view addSubview:copyrightLabel];
     
 }
+
 -(id)title{
     return @"Donate";
 }
@@ -181,6 +182,7 @@
         [self release];
     }];
 }
+
 -(void)dealloc{
     
     [donateLabel release];
@@ -445,7 +447,7 @@ int getloadavg (double loadavg[], int nelem);
 -(void)viewDidLoad{
     
     [super viewDidLoad];
-    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissMe:)];
+    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(restartPopup)];
     self.navigationItem.rightBarButtonItem=right;
     self.navigationItem.rightBarButtonItem.tintColor=[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:1.0];
     [right release];
@@ -461,6 +463,20 @@ int getloadavg (double loadavg[], int nelem);
         [self release];
     }];
 }
+
+-(void)restartPopup{
+    UIAlertController *alertPopup=[UIAlertController alertControllerWithTitle:@"MobileMiner"
+        message:@"Please restart MobileMiner for the changes to take place"
+        preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *alertOptions = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * action) {}];
+
+    [alertPopup addAction:alertOptions];
+    [self presentViewController:alertPopup animated:YES completion:nil];
+    
+    dismissMe:;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }
@@ -625,6 +641,8 @@ int getloadavg (double loadavg[], int nelem);
     InfoLabel *userValue;
     InfoLabel *passLabel;
     InfoLabel *passValue;
+    InfoLabel *algoLabel;
+    InfoLabel *algoValue;
     InfoLabel *threadsLabel;
     InfoLabel *threadsValue;
     InfoLabel *confLabel;
@@ -702,8 +720,6 @@ int getloadavg (double loadavg[], int nelem);
     [defaults setObject:[configuration objectForKey:@"id"] forKey:@"activeConfigurationID"];
     [defaults synchronize];
     [self.view insertSubview:[self activeView] atIndex:0];
-    
-    
 }
 -(id)title{
     return @"MobileMiner - Quiqqy's Edit";
@@ -745,9 +761,9 @@ int getloadavg (double loadavg[], int nelem);
         mineButton=[[UIButton buttonWithType:UIButtonTypeCustom] retain];
         BOOL isReachable=[[objc_getClass("PCPersistentInterfaceManager") sharedInstance] isInternetReachable];
         
-        [mineButton setTitle:@"Start ETN Mining!" forState:UIControlStateNormal];
-        [mineButton setTitle:@"Stop ETN Mining" forState:UIControlStateSelected];
-        [mineButton setTitle:@"Stop ETN Mining" forState:(UIControlState)5];
+        [mineButton setTitle:@"Start Mining!" forState:UIControlStateNormal];
+        [mineButton setTitle:@"Stop Mining" forState:UIControlStateSelected];
+        [mineButton setTitle:@"Stop Mining" forState:(UIControlState)5];
         [mineButton setTitle:isReachable ? @"Stopping..." : @"Cannot Mine" forState:UIControlStateDisabled];
         mineButton.enabled=isReachable || state==1;
         mineButton.titleLabel.font=[UIFont boldSystemFontOfSize:30];
@@ -951,7 +967,15 @@ int getloadavg (double loadavg[], int nelem);
         passValue.layer.borderColor=[[UIColor colorWithRed:0.22 green:0.22 blue:0.22 alpha:0.6] CGColor];
         passValue.layer.borderWidth=0.5;
         
-        threadsLabel=[[InfoLabel alloc] initWithFrame:CGRectMake(20,passValue.frame.origin.y+passValue.frame.size.height+7,80,30)];
+        algoLabel=[[InfoLabel alloc] initWithFrame:CGRectMake(20,passValue.frame.origin.y+passValue.frame.size.height+13,130,30)];
+        algoLabel.font=[UIFont boldSystemFontOfSize:15];
+        algoValue=[[InfoLabel alloc] initWithFrame:CGRectMake(20,algoLabel.frame.origin.y+26,activeView.frame.size.width-40,17)];
+        
+        algoValue.backgroundColor=[UIColor colorWithRed:0.23 green:0.23 blue:0.23 alpha:0.7];
+        algoValue.layer.borderColor=[[UIColor colorWithRed:0.22 green:0.22 blue:0.22 alpha:0.6] CGColor];
+        algoValue.layer.borderWidth=0.5;
+        
+        threadsLabel=[[InfoLabel alloc] initWithFrame:CGRectMake(20,algoValue.frame.origin.y+algoValue.frame.size.height+7,80,30)];
         threadsLabel.font=[UIFont boldSystemFontOfSize:15];
         threadsValue=[[InfoLabel alloc] initWithFrame:CGRectMake(20,threadsLabel.frame.origin.y+26,activeView.frame.size.width-40,17)];
         threadsValue.backgroundColor=[UIColor colorWithRed:0.23 green:0.23 blue:0.23 alpha:0.7];
@@ -962,6 +986,7 @@ int getloadavg (double loadavg[], int nelem);
         urlLabel.text=@"Pool URL:";
         userLabel.text=@"User:";
         passLabel.text=@"Pass:";
+        algoLabel.text=@"Algorithm Name:";
         threadsLabel.text=@"Threads:";
         
         [activeView addSubview:confLabel];
@@ -974,6 +999,8 @@ int getloadavg (double loadavg[], int nelem);
         [activeView addSubview:userValue];
         [activeView addSubview:passLabel];
         [activeView addSubview:passValue];
+        [activeView addSubview:algoLabel];
+        [activeView addSubview:algoValue];
         [activeView addSubview:threadsLabel];
         [activeView addSubview:threadsValue];
         
@@ -1000,9 +1027,12 @@ int getloadavg (double loadavg[], int nelem);
     urlValue.text=[activeConfig objectForKey:@"url"];
     userValue.text=[activeConfig objectForKey:@"user"];
     passValue.text=[activeConfig objectForKey:@"pass"];
+    algoValue.text=[activeConfig objectForKey:@"algo"];
     threadsValue.text=[activeConfig objectForKey:@"threads"];
     passValue.frame=CGRectMake(20,passLabel.frame.origin.y+26,activeView.frame.size.width-40,17);
-    threadsLabel.frame=CGRectMake(20,passValue.frame.origin.y+passValue.frame.size.height+7,80,30);
+    algoLabel.frame=CGRectMake(20,passValue.frame.origin.y+userValue.frame.size.height+13,130,30);
+    algoValue.frame=CGRectMake(20,algoLabel.frame.origin.y+26,activeView.frame.size.width-40,17);
+    threadsLabel.frame=CGRectMake(20,algoValue.frame.origin.y+algoValue.frame.size.height+7,80,30);
     threadsValue.frame=CGRectMake(20,threadsLabel.frame.origin.y+26,activeView.frame.size.width-40,17);
     
     
@@ -1012,6 +1042,8 @@ int getloadavg (double loadavg[], int nelem);
         confLabel.alpha=0;
         passLabel.alpha=0;
         passValue.alpha=0;
+        algoLabel.alpha=0;
+        algoValue.alpha=0;
         threadsLabel.alpha=0;
         threadsValue.alpha=0;
         CGRect frame=activeView.frame;
@@ -1070,6 +1102,8 @@ int getloadavg (double loadavg[], int nelem);
             confLabel.alpha=0;
             passLabel.alpha=0;
             passValue.alpha=0;
+            algoLabel.alpha=0;
+            algoValue.alpha=0;
             threadsLabel.alpha=0;
             threadsValue.alpha=0;
             CGRect frame=activeView.frame;
@@ -1112,6 +1146,8 @@ int getloadavg (double loadavg[], int nelem);
             confLabel.alpha=1;
             passLabel.alpha=1;
             passValue.alpha=1;
+            algoLabel.alpha=1;
+            algoValue.alpha=1;
             threadsLabel.alpha=1;
             threadsValue.alpha=1;
             CGRect frame=activeView.frame;

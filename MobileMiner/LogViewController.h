@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UserNotifications/UserNotifications.h>
 #include <dlfcn.h>
 
 int start_mining(int argc,char *argv[]);

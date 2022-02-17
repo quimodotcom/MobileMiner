@@ -130,7 +130,6 @@ static BOOL hasSavedDev=NO;
     [fakeRootController.view addSubview:statusView];
     
     [window makeKeyAndVisible];
-    [application registerUserNotificationSettings: [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     
     UIApplication* app = [UIApplication sharedApplication];
     
