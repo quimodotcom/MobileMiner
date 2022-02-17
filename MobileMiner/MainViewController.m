@@ -447,6 +447,7 @@ int getloadavg (double loadavg[], int nelem);
     [super viewDidLoad];
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissMe:)];
     self.navigationItem.rightBarButtonItem=right;
+    self.navigationItem.rightBarButtonItem.tintColor=[UIColor colorWithRed:0.73 green:0.35 blue:0.76 alpha:1.0];
     [right release];
     self.tableView.separatorColor=[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8];
     UIBlurEffect *blurEffect=[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
@@ -705,7 +706,7 @@ int getloadavg (double loadavg[], int nelem);
     
 }
 -(id)title{
-    return @"MobileMiner";
+    return @"MobileMiner - Quiqqy's Edit";
 }
 -(void)viewDidLoad{
     [super viewDidLoad];
@@ -764,7 +765,7 @@ int getloadavg (double loadavg[], int nelem);
         [mineButton setTitleColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.7] forState:UIControlStateDisabled];
         
         [mineButton addTarget:self action:@selector(toggleMining:) forControlEvents:UIControlEventTouchUpInside];
-        mineButton.frame=CGRectMake(self.view.frame.size.width/2-210/2,self.view.frame.size.height-140,210,40);
+        mineButton.frame=CGRectMake(self.view.frame.size.width/2-280/2,self.view.frame.size.height-140,280,40);
         
         infoLabel=[[InfoLabel alloc] initWithFrame:CGRectMake(0,mineButton.frame.origin.y-45,self.view.frame.size.width,30)];
         infoLabel.textColor=[UIColor whiteColor];
@@ -891,7 +892,7 @@ int getloadavg (double loadavg[], int nelem);
     
     if (!activeView){
         
-        activeView=[[UIView alloc] initWithFrame:CGRectMake(0,110,self.view.frame.size.width,320)];
+        activeView=[[UIView alloc] initWithFrame:CGRectMake(0,180,self.view.frame.size.width,400)];
         
         confLabel=[[InfoLabel alloc] initWithFrame:CGRectMake(0,-30,self.view.frame.size.width,20)];
         confLabel.font=[UIFont boldSystemFontOfSize:17];
@@ -1014,7 +1015,7 @@ int getloadavg (double loadavg[], int nelem);
         threadsLabel.alpha=0;
         threadsValue.alpha=0;
         CGRect frame=activeView.frame;
-        frame.origin.y=20;
+        frame.origin.y=0;
         activeView.frame=frame;
     }
     return activeView;
@@ -1072,7 +1073,7 @@ int getloadavg (double loadavg[], int nelem);
             threadsLabel.alpha=0;
             threadsValue.alpha=0;
             CGRect frame=activeView.frame;
-            frame.origin.y=20;
+            frame.origin.y=0;
             activeView.frame=frame;
             
         } completion:^(BOOL ok){
@@ -1104,7 +1105,7 @@ int getloadavg (double loadavg[], int nelem);
     else{
         mineButton.enabled=YES;
         mineButton.selected=NO;
-        statusView.frame=CGRectMake(20,self.view.frame.size.height/2-200/2-10,self.view.frame.size.width-40,270);
+        statusView.frame=CGRectMake(20,self.view.frame.size.height/2-100/2-10,self.view.frame.size.width-40,270);
         [UIView animateWithDuration:0.54 animations:^{
             nameLabel.alpha=1;
             nameValue.alpha=1;
@@ -1114,7 +1115,7 @@ int getloadavg (double loadavg[], int nelem);
             threadsLabel.alpha=1;
             threadsValue.alpha=1;
             CGRect frame=activeView.frame;
-            frame.origin.y=110;
+            frame.origin.y=0;
             activeView.frame=frame;
             statusView.frame=CGRectMake(self.view.frame.size.width/2,self.view.frame.size.height/2,0.0,0.0);
         } completion:^(BOOL ok){
